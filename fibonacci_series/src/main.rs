@@ -16,6 +16,11 @@ fn main() {
         },
     };
 
+    ordinary(number);
+    recursive_call(number);
+}
+
+fn ordinary(number: i64) {
     let mut first_number: i64 = 1;
     let mut second_number: i64 = 1;
 
@@ -38,4 +43,21 @@ fn main() {
     } 
 
     println!("{}", target_number);
+}
+
+fn recursive_call(number: i64) {
+    let ans = recursive(number);
+    println!("Fibonacci number: {}", ans);
+}
+
+fn recursive(number: i64) -> i64 {
+    if number <= 0 {
+        return 0;
+    }
+
+    if number == 1 || number == 2 {
+        return 1;
+    }
+
+    recursive(number - 1) + recursive(number - 2)
 }
