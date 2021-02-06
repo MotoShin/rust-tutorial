@@ -45,12 +45,18 @@ fn ordinary(number: i64) {
     println!("{}", target_number);
 }
 
+// recursive method call
 fn recursive_call(number: i64) {
-    let ans = recursive(number);
+    let mut v: Vec<i64> = Vec::with_capacity(number as usize);
+    for _i in 0..number {
+        v.push(-1);
+    }
+    let ans = recursive(number, &mut v);
     println!("Fibonacci number: {}", ans);
 }
 
-fn recursive(number: i64) -> i64 {
+// recursive method
+fn recursive(number: i64, v: &mut Vec<i64>) -> i64 {
     if number <= 0 {
         return 0;
     }
@@ -59,5 +65,11 @@ fn recursive(number: i64) -> i64 {
         return 1;
     }
 
-    recursive(number - 1) + recursive(number - 2)
+    if v[(number - 1) as usize] != -1 {
+        return v[(number - 1) as usize];
+    }
+
+    let ans = recursive(number - 1, v) + recursive(number - 2, v);
+    v[(number - 1) as usize] = ans;
+    ans
 }
